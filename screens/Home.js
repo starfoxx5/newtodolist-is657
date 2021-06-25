@@ -9,7 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 
-const ListButton = ({ title, color, onPress, onDelete }) => {
+const ListButton = ({ title, color, onPress, onDelete, onOptions }) => {
   return (
     <TouchableOpacity
       style={[styles.itemContainer, { backgroundColor: color }]}
@@ -72,7 +72,12 @@ export default ({ navigation }) => {
               title={title}
               color={color}
               navigation={navigation}
-              onPress={navigation.navigate("ToDoList", { title, color })}
+              onPress={() => {
+                navigation.navigate("ToDoList", { title, color });
+              }}
+              onOptions={() => {
+                navigation.navigate("Edit", { title, color });
+              }}
               onDelete={() => removeItemFromLists(index)}
             />
           );
