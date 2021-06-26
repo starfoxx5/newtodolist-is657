@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import ToDoList from "./screens/ToDoList";
 import EditList from "./screens/EditList";
+import Colors from "./constants/Colors";
 
 const Stack = createStackNavigator();
 
@@ -30,9 +31,11 @@ export default function App() {
           component={EditList}
           options={({ route }) => {
             return {
-              title: `Edit ${route.params.title} list`,
+              title: route.params.title
+                ? `Edit ${route.params.title} list`
+                : "Create New List",
               headerStyle: {
-                backgroundColor: route.params.color,
+                backgroundColor: route.params.color || Colors.blue,
               },
               headerTintColor: "white",
             };

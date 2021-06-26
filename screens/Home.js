@@ -19,7 +19,7 @@ const ListButton = ({ title, color, onPress, onDelete, onOptions }) => {
         <Text style={styles.itemTitle}>{title}</Text>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onOptions}>
           <Ionicons name="options-outline" size={24} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={onDelete}>
@@ -30,10 +30,12 @@ const ListButton = ({ title, color, onPress, onDelete, onOptions }) => {
   );
 };
 
-const renderAddListIcon = (addItem) => {
+const renderAddListIcon = (navigation, addItemToLists) => {
   return (
     <TouchableOpacity
-      onPress={() => addItem({ title: "Title", color: Colors.orange })}
+      onPress={() =>
+        navigation.navigate("Edit", { saveChanges: addItemToLists })
+      }
     >
       <Text style={styles.icon}>+</Text>
     </TouchableOpacity>
@@ -57,9 +59,14 @@ export default ({ navigation }) => {
     setLists([...lists]);
   };
 
+  const updateItemFromLists = (index, item) => {
+    lists[index] = item;
+    setLists([...lists]);
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => renderAddListIcon(addItemToLists),
+      headerRight: () => renderAddListIcon(navigation, addItemToLists),
     });
   });
   return (
@@ -76,7 +83,11 @@ export default ({ navigation }) => {
                 navigation.navigate("ToDoList", { title, color });
               }}
               onOptions={() => {
-                navigation.navigate("Edit", { title, color });
+                navigation.navigate("Edit", {
+                  title,
+                  color,
+                  saveChanges: (item) => updateItemFromLists(index, item),
+                });
               }}
               onDelete={() => removeItemFromLists(index)}
             />
