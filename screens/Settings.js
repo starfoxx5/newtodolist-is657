@@ -2,7 +2,8 @@ import React from "react";
 import { View } from "react-native";
 
 import Button from "../components/Button";
-import { auth } from "firebase";
+// import { auth } from "firebase";
+import "firebase/auth";
 
 export default () => {
   return (

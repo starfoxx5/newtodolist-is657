@@ -8,9 +8,13 @@ import Login from "./screens/Login";
 import Settings from "./screens/Settings";
 import Colors from "./constants/Colors";
 // import * as firebase from "firebase";
+// import firebase from "firebase/app";
+// require("firebase/auth");
+// import "firebase/firestore";
 import firebase from "firebase/app";
-require("firebase/auth");
+
 import "firebase/firestore";
+import "firebase/auth";
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
