@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import LabeledInput from "../components/LabeledInput";
 import Colors from "../constants/Colors";
 import validator from "validator";
-import { auth } from "firebase";
+import { auth, firestore } from "firebase";
 
 const validateFields = (email, password) => {
   const isValid = {
@@ -32,6 +32,7 @@ const createAccount = (email, password) => {
     .createUserWithEmailAndPassword(email, password)
     .then(({ user }) => {
       console.log("Creating user...");
+      firestore().collection("users").doc(user.uid).set({});
     });
 };
 
