@@ -3,6 +3,7 @@ import { View } from "react-native";
 
 import Button from "../components/Button";
 // import { auth } from "firebase";
+import firebase from "firebase/app";
 import "firebase/auth";
 
 export default () => {
@@ -11,7 +12,7 @@ export default () => {
       <Button
         text="Log out"
         onPress={() => {
-          auth().signOut();
+          firebase.auth().signOut();
         }}
       />
     </View>

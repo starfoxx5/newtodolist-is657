@@ -15,6 +15,7 @@ import {
   updateDoc,
 } from "../services/collections";
 // import { firestore, auth } from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
@@ -31,9 +32,10 @@ export default ({ navigation, route }) => {
 
   const [newItem, setNewItem] = useState();
 
-  const toDoItemsRef = firestore()
+  const toDoItemsRef = firebase
+    .firestore()
     .collection("users")
-    .doc(auth().currentUser.uid)
+    .doc(firebase.auth().currentUser.uid)
     .collection("lists")
     .doc(route.params.listId)
     .collection("todoItems");

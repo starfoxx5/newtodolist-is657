@@ -1,5 +1,6 @@
 export const onSnapshot = (ref, callback, options) => {
   ref.onSnapshot((snapshot) => {
+    console.log(snapshot);
     let items = snapshot.docs.map((doc) => {
       const data = doc.data();
       data.id = doc.id;
@@ -11,6 +12,7 @@ export const onSnapshot = (ref, callback, options) => {
 
 export const addDoc = (ref, { id, ...data }) => {
   const doc = id ? ref.doc(id) : ref.doc();
+  console.log(id, data);
   doc.set(data).then(() => {
     console.log("Add new item");
   });

@@ -15,9 +15,9 @@ import {
   updateDoc,
 } from "../services/collections";
 // import { firestore, auth } from "firebase";
-
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from "firebase/app";
+// import "firebase/firestore";
+// import "firebase/auth";
 
 const ListButton = ({ title, color, onPress, onDelete, onOptions }) => {
   return (
@@ -63,15 +63,17 @@ const renderAddListIcon = (navigation, addItemToLists) => {
 
 export default ({ navigation }) => {
   const [lists, setLists] = useState([]);
-  const listsRef = firestore()
+  const listsRef = firebase
+    .firestore()
     .collection("users")
-    .doc(auth().currentUser.uid)
+    .doc(firebase.auth().currentUser.uid)
     .collection("lists");
 
   useEffect(() => {
     onSnapshot(
       listsRef,
       (newLists) => {
+        console.log(newLists);
         setLists(newLists);
       },
       {
@@ -90,7 +92,7 @@ export default ({ navigation }) => {
 
   const addItemToLists = ({ title, color }) => {
     const index = lists.length > 1 ? lists[lists.length - 1].index + 1 : 0;
-    addDoc(listRef, { title, color, index });
+    addDoc(listsRef, { title, color, index });
   };
 
   const removeItemFromLists = (id) => {

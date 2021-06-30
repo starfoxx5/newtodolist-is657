@@ -5,9 +5,10 @@ import LabeledInput from "../components/LabeledInput";
 import Colors from "../constants/Colors";
 import validator from "validator";
 // import { firestore, auth } from "firebase";
+import firebase from "firebase/app";
 
-import "firebase/firestore";
-import "firebase/auth";
+// import "firebase/firestore";
+// import "firebase/auth";
 
 const validateFields = (email, password) => {
   const isValid = {
@@ -24,7 +25,8 @@ const validateFields = (email, password) => {
 };
 
 const login = (email, password) => {
-  auth()
+  firebase
+    .auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
       console.log("Logged In!");
@@ -32,11 +34,12 @@ const login = (email, password) => {
 };
 
 const createAccount = (email, password) => {
-  auth()
+  firebase
+    .auth()
     .createUserWithEmailAndPassword(email, password)
     .then(({ user }) => {
       console.log("Creating user...");
-      firestore().collection("users").doc(user.uid).set({});
+      firebase.firestore().collection("users").doc(user.uid).set({});
     });
 };
 
