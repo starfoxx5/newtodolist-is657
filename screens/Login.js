@@ -59,7 +59,7 @@ export default () => {
   });
   return (
     <View style={styles.container}>
-      <Text style={styles.header}> ToDo</Text>
+      <Text style={styles.header}> My TO-DO</Text>
       <View style={{ flex: 1 }}>
         <LabeledInput
           label="Email"
@@ -139,7 +139,7 @@ export default () => {
               : login(emailField.text, passwordField.text);
           }
         }}
-        buttonStyle={{ backgroundColor: Colors.red }}
+        buttonStyle={{ backgroundColor: "darkgreen" }}
         text={isCreateMode ? "Create Account" : "Login"}
       />
     </View>
@@ -154,5 +154,11 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   label: { fontSize: 16, fontWeight: "bold", color: Colors.black },
-  header: { fontSize: 72, color: Colors.red, alignSelf: "center" },
+  header: {
+    fontSize: 72,
+    fontFamily: "Impact Regular",
+    // fontWeight: "bold",
+    color: "darkgreen",
+    alignSelf: "center",
+  },
 });
